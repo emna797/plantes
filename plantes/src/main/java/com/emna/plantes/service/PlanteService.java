@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
 
 public interface PlanteService {
@@ -13,5 +14,12 @@ public interface PlanteService {
 	    void deletePlanteById(Long id); 
 	    plante getPlante(Long id); 
 	  List<plante> getAllPlantes(); 
-	  Page<plante> getAllPlantesParPage(int page, int size);
+	  /*Page<plante> getAllPlantesParPage(int page, int size);*/
+	  List<plante> findByNomPlante(String nom); 
+	  List<plante> findByNomPlanteContains(String nom); 
+	  List<plante> findByNomPrix (String nom, Double prix); 
+	  List<plante> findByFamille (Famille famille); 
+	  List<plante> findByFamilleIdFam(Long id);
+	  List<plante> findByOrderByNomPlanteAsc(); 
+	  List<plante> trierPlantesNomsPrix();
 }

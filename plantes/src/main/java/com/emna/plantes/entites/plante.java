@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 @Entity
 public class plante {
 	@Id
@@ -14,6 +15,8 @@ public class plante {
     private String nomPlante;
     private Double prixPlante;
     private Date dateAjout;
+    @ManyToOne
+    private Famille famille;
     
 	public plante() {
 		super();
@@ -55,6 +58,14 @@ public class plante {
 	public String toString() {
 		return "plante [idPlante=" + idPlante + ", nomPlante=" + nomPlante + ", prixPlante=" + prixPlante
 				+ ", dateAjout=" + dateAjout + "]";
+	}
+
+	public Famille getFamille() {
+		return famille;
+	}
+
+	public void setFamille(Famille famille) {
+		this.famille = famille;
 	}
 	
     

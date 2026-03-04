@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
 import com.emna.plantes.repos.PlanteRepository;
 @Service
@@ -50,6 +51,48 @@ public class PlanteServiceImpl implements PlanteService{
 	@Override
 	public Page<plante> getAllPlantesParPage(int page, int size) {
 		return planteRepository.findAll(PageRequest.of(page, size));
+	};
+
+	@Override
+	public List<plante> findByNomPlante(String nom) {
+		// TODO Auto-generated method stub
+		return planteRepository.findByNomPlante(nom);
+	}
+
+	@Override
+	public List<plante> findByNomPlanteContains(String nom) {
+		// TODO Auto-generated method stub
+		return planteRepository.findByNomPlanteContains(nom);
+	}
+
+	@Override
+	public List<plante> findByNomPrix(String nom, Double prix) {
+		// TODO Auto-generated method stub
+		return planteRepository.findByNomPrix(nom, prix);
+	}
+
+	@Override
+	public List<plante> findByFamille(Famille famille) {
+		// TODO Auto-generated method stub
+		return planteRepository.findByFamille(famille);
+	}
+
+	@Override
+	public List<plante> findByFamilleIdFam(Long id) {
+		// TODO Auto-generated method stub
+		return planteRepository.findByFamilleIdFam(id);
+	}
+
+	@Override
+	public List<plante> findByOrderByNomPlanteAsc() {
+		// TODO Auto-generated method stub
+		return planteRepository.findByOrderByNomPlanteAsc();
+	}
+
+	@Override
+	public List<plante> trierPlantesNomsPrix() {
+		// TODO Auto-generated method stub
+		return planteRepository.trierPlantesNomsPrix();
 	}
 
 }

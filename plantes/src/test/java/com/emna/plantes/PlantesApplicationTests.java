@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
+import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
 import com.emna.plantes.repos.PlanteRepository;
 import com.emna.plantes.service.PlanteService;
@@ -67,5 +68,69 @@ class PlantesApplicationTests {
 	{ 
 	System.out.println(p); 
 	} */
-}
+   }
+	@Test 
+	public void findByNomPlante() 
+	{ 
+	 List <plante> pls = planteRepository.findByNomPlante("Rose");
+	 for( plante p:pls )
+	    System.out.println(p); 
+	}
+	@Test
+	public void findByNomPlanteContains () 
+	{ 
+	List<plante> pls=planteRepository.findByNomPlanteContains("o"); 
+	for (plante p : pls) 
+	{ 
+	System.out.println(p); 
+	} } 
+	@Test
+	public void testfindByNomPrix() 
+	{ 
+	List<plante>  pls = planteRepository.findByNomPrix("Tulipe", 12.5); 
+	for (plante p : pls) 
+	{ 
+	System.out.println(p); 
+	} 
+	} 
+	@Test 
+	public void testfindByCategorie() 
+	{ 
+	Famille fam = new Famille(); 
+	fam.setIdFam(1L);    
+	List<plante>  pls = planteRepository.findByFamille(fam); 
+	for (plante p : pls) 
+	{ 
+	System.out.println(p); 
+	} 
+	} 
+	@Test 
+	public void findByFamilleIdFam() 
+	{    
+	List<plante>  pls = planteRepository.findByFamilleIdFam(1L); 
+	for (plante p : pls) 
+	{ 
+	System.out.println(p); 
+	} 
+	}
+	@Test 
+	 public void findByOrderByNomPlanteAsc() 
+	  { 
+	  List<plante>  pls =planteRepository.findByOrderByNomPlanteAsc();   
+	   for (plante p : pls) 
+	   { 
+	    System.out.println(p); 
+	   } 
+	  }
+	@Test 
+	 public void testTrierProduitsNomsPrix() 
+	  { 
+	  List<plante>  pls = planteRepository.trierPlantesNomsPrix();
+	   
+	   for (plante p : pls) 
+	   { 
+	    System.out.println(p); 
+	   } 
+	  } 
+	
 }
