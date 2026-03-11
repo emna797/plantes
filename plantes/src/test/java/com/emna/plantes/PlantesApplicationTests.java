@@ -2,6 +2,7 @@ package com.emna.plantes;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,11 @@ class PlantesApplicationTests {
 	@Test 
 	public void testFindPlante() 
 	{ 
-	plante p = planteRepository.findById(2L).get();     
-	System.out.println(p); 
+	Optional<plante> p = planteRepository.findById(2L);
+	if(!p.isPresent()) 
+		System.out.println("plante inexistante");
+	else
+	    System.out.println(p); 
 	} 
 	@Test 
 	public void testUpdatePlante() 

@@ -21,9 +21,9 @@ public class PlantesApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		planteService.savePlante(new plante("Jasmin", 18.5, new Date()));
+		/*planteService.savePlante(new plante("Jasmin", 18.5, new Date()));
 		planteService.savePlante(new plante("Lavande", 20.0, new Date()));
-		planteService.savePlante(new plante("Tournesol", 10.0, new Date()));
+		planteService.savePlante(new plante("Tournesol", 10.0, new Date()));*/
 		
 	}
 

@@ -41,9 +41,5 @@ public class Famille {
 	public void setDescriptionFam(String descriptionFam) {
 		this.descriptionFam = descriptionFam;
 	}
-	public Famille() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
     
 }

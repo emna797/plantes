@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
+import com.emna.plantes.repos.FamilleRepository;
 import com.emna.plantes.repos.PlanteRepository;
 @Service
 public class PlanteServiceImpl implements PlanteService{
 
 	@Autowired
 	PlanteRepository planteRepository;
-	
+	@Autowired 
+	FamilleRepository familleRepository; 
 	@Override
 	public plante savePlante(plante p) {
 		return planteRepository.save(p);
@@ -93,6 +95,11 @@ public class PlanteServiceImpl implements PlanteService{
 	public List<plante> trierPlantesNomsPrix() {
 		// TODO Auto-generated method stub
 		return planteRepository.trierPlantesNomsPrix();
+	}
+	
+	@Override
+	public List<Famille> getAllFamilles() {
+		return familleRepository.findAll();
 	}
 
 }

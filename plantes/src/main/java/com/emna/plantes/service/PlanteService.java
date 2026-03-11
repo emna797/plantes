@@ -14,7 +14,7 @@ public interface PlanteService {
 	    void deletePlanteById(Long id); 
 	    plante getPlante(Long id); 
 	  List<plante> getAllPlantes(); 
-	  /*Page<plante> getAllPlantesParPage(int page, int size);*/
+	  Page<plante> getAllPlantesParPage(int page, int size);
 	  List<plante> findByNomPlante(String nom); 
 	  List<plante> findByNomPlanteContains(String nom); 
 	  List<plante> findByNomPrix (String nom, Double prix); 
@@ -22,4 +22,5 @@ public interface PlanteService {
 	  List<plante> findByFamilleIdFam(Long id);
 	  List<plante> findByOrderByNomPlanteAsc(); 
 	  List<plante> trierPlantesNomsPrix();
+	  List<Famille> getAllFamilles();  
 }
