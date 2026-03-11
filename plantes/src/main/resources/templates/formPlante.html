@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+	<meta charset="utf-8">
+	<title>Ajout des Plantes</title>
+</head>
+
+<body>
+	<div th:replace="template"></div>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header"> Ajout des Plantes </div>
+			<div class="card-body">
+				<form th:action="@{savePlante}" method="post">
+					<input hidden name="page" class="form-control" th:value="${page}"  /> 
+					<input hidden name="size" class="form-control" th:value="${size}"  />
+					<div class="form-group">
+						<div class="form-group"> 
+						   <label class="control-label" hidden>ID Plante :</label>  
+						       <input type="hidden" name="idPlante" class="form-control" 
+						th:value="${plante.idPlante}"  /> 
+						  </div> 
+						<label class="control-label">Nom Plante :</label>
+						<input type="text" name="nomPlante" class="form-control" th:value="${plante.nomPlante}" />
+						<span th:errors= ${plante.nomPlante} class="text-danger"> </span> 
+					</div>
+					<div class="form-group">
+						<label class="control-label">Prix Plante :</label>
+						<input type="text" name="prixPlante" class="form-control" th:value="${plante.prixPlante}" />
+						<span th:errors= ${plante.prixPlante} class="text-danger"> </span> 
+					</div>
+					<div class="form-group">
+						<label class="control-label">date création :</label>
+						<input type="date" name="dateAjout" class="form-control" th:value="${plante.dateAjout}" />
+						<span th:errors= ${plante.dateAjout} class="text-danger"> </span> 
+					</div>
+					<div class="form-group"> 
+					 <label class="control-label">Famille :</label>  
+					 <select name="famille" class="form-control" 
+					 th:value="${plante.famille.idFam}"  
+					 th:if="${!#strings.isEmpty(plante.famille)}" >  
+					 <option th:each="c:${familles}" th:if="${mode=='edit'}"  
+					         th:value="${c.idFam}" th:text="${c.nomFam}" 
+					    th:selected="${ c.idFam==plante.famille.idFam}"> 
+					 </option>     
+					  
+					</select> 
+					 <!-- s'il s'agit d'un ajout (mode==new) ou d'une modification d'un produit ayant une catégorie null --> 
+					 <select name="famille" class="form-control" 
+					 th:if="${#strings.isEmpty(plante.famille)}"> 
+					 <option th:each="c:${familles}" th:value="${c.idFam}"  
+					    th:text="${c.nomFam}"> 
+					 </option> 
+					 </select>  
+					 </div> 
+					<div>
+						<button type="submit" class="btn btn-primary">Valider</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
