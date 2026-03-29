@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec=https://www.thymeleaf.org/thymeleaf-extras-springsecurity6 >
 
 <link rel="stylesheet" type="text/css"
       href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -34,7 +35,7 @@
             </a>
 
             <div class="dropdown-menu">
-                <a class="dropdown-item" th:href="@{/showCreate}">Ajouter</a>
+                <a  sec:authorize="hasAnyAuthority('ADMIN', 'AGENT')" class="dropdown-item" th:href="@{/showCreate}">Ajouter</a>
                 <a class="dropdown-item" th:href="@{/ListePlantes}">Lister</a>
             </div>
         </li>
@@ -46,14 +47,16 @@
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop2" data-toggle="dropdown">
-                [username]
+                <span sec:authentication="name"></span> 
             </a>
 
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">login</a>
-                <a class="dropdown-item" href="#">logout</a>
-                <a class="dropdown-item" href="#">Profile</a>
-            </div>
+			<div class="dropdown-menu"> 
+			<a sec:authorize="!isAuthenticated()" class="dropdown-item" 
+			th:href="@{login}">login</a> 
+			<a sec:authorize="isAuthenticated()" class="dropdown-item" 
+			th:href="@{logout}">logout</a> 
+			<a class="dropdown-item" href="#">Profile</a> 
+			</div> 
         </li>
 
     </ul>

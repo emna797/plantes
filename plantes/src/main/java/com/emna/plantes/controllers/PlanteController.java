@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,12 @@ import jakarta.validation.Valid;
 public class PlanteController {
 	@Autowired
 	PlanteService planteService;
+	
+	@GetMapping("/accessDenied") 
+	public String error() 
+	{ 
+	return "accessDenied"; 
+	} 
 
 	@RequestMapping("/ListePlantes")
 	public String listePlantes(ModelMap modelMap,@RequestParam (name="page",defaultValue = "0") int page, 
@@ -57,12 +64,13 @@ public class PlanteController {
 		planteService.savePlante(p); 
 		if (isNew) //ajout 
 		{ 
-		Page<plante> prods = planteService.getAllPlantesParPage(page, size); 
-		currentPage = prods.getTotalPages()-1; 
+		Page<plante> plt = planteService.getAllPlantesParPage(page, size); 
+		currentPage = plt.getTotalPages()-1; 
 		} 
 		else //modif 
 		currentPage=page; 
-	    return ("redirect:/ListePlantes?page="+currentPage+"&size"+size);  
+	    return ("redirect:/ListePlantes?page="+currentPage+"&size="+size);  
+	    
 	} 
 
 	@RequestMapping("/supprimerPlante")

@@ -23,23 +23,7 @@ public class Famille {
     private String descriptionFam;
     @OneToMany(mappedBy="famille")
     private List<plante>plantes;
-	public Long getIdFam() {
-		return idFam;
-	}
-	public void setIdFam(Long idFam) {
-		this.idFam = idFam;
-	}
-	public String getNomFam() {
-		return nomFam;
-	}
-	public void setNomFam(String nomFam) {
-		this.nomFam = nomFam;
-	}
-	public String getDescriptionFam() {
-		return descriptionFam;
-	}
-	public void setDescriptionFam(String descriptionFam) {
-		this.descriptionFam = descriptionFam;
-	}
     
 }
+    
+
