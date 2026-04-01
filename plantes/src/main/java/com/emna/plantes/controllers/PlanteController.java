@@ -9,11 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.emna.plantes.dto.PlanteDTO;
 import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
 import com.emna.plantes.service.PlanteService;
@@ -21,9 +23,12 @@ import com.emna.plantes.service.PlanteService;
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/api")
+@CrossOrigin
 public class PlanteController {
 	@Autowired
 	PlanteService planteService;
+	
 	
 	@GetMapping("/accessDenied") 
 	public String error() 
@@ -94,7 +99,7 @@ public class PlanteController {
 	public String editerPlante(@RequestParam("id") Long id, ModelMap modelMap,@RequestParam (name="page",defaultValue = "0") int page, 
 			@RequestParam (name="size", defaultValue = "2") int size) {
 
-		plante p = planteService.getPlante(id);
+		PlanteDTO p = planteService.getPlante(id);
 		List<Famille> fams = planteService.getAllFamilles();
 		modelMap.addAttribute("plante", p);
 		modelMap.addAttribute("mode", "edit");
@@ -104,20 +109,6 @@ public class PlanteController {
 		return "formPlante";
 	}
 
-	@RequestMapping("/updatePlante")
-	public String updatePlante(@ModelAttribute("plante") plante plante, @RequestParam("date") String date,
-			ModelMap modelMap) throws ParseException {
-
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateAjout = dateformat.parse(date);
-		plante.setDateAjout(dateAjout);
-
-		planteService.updatePlante(plante);
-
-		List<plante> plantes = planteService.getAllPlantes();
-		modelMap.addAttribute("plantes", plantes);
-
-		return "listePlantes";
-	}
+	  
 
 }

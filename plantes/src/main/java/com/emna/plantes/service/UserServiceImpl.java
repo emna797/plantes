@@ -1,4 +1,4 @@
-package com.emna.plantes.service;
+/*package com.emna.plantes.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,4 +60,4 @@ public class UserServiceImpl implements UserService {
 		return userRep.findByUsername(username);
 	}
 
-}
+}*/

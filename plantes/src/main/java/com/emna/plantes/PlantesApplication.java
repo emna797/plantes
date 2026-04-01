@@ -2,11 +2,12 @@ package com.emna.plantes;
 
 import java.util.Date;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.emna.plantes.entites.Role;
 import com.emna.plantes.entites.User;
@@ -21,8 +22,8 @@ public class PlantesApplication implements CommandLineRunner {
 
 	@Autowired
 	PlanteService planteService;
-	@Autowired
-	PasswordEncoder passwordEncoder;
+	/*@Autowired
+	PasswordEncoder passwordEncoder;*/
 	@Autowired
 	UserService userService;
 

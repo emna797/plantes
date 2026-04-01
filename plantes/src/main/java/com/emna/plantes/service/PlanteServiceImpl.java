@@ -1,26 +1,31 @@
 package com.emna.plantes.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.emna.plantes.dto.PlanteDTO;
 import com.emna.plantes.entites.Famille;
 import com.emna.plantes.entites.plante;
 import com.emna.plantes.repos.FamilleRepository;
 import com.emna.plantes.repos.PlanteRepository;
+
 @Service
-public class PlanteServiceImpl implements PlanteService{
+public class PlanteServiceImpl implements PlanteService {
 
 	@Autowired
 	PlanteRepository planteRepository;
-	@Autowired 
-	FamilleRepository familleRepository; 
+	@Autowired
+	FamilleRepository familleRepository;
+
 	@Override
-	public plante savePlante(plante p) {
-		return planteRepository.save(p);
+	public PlanteDTO savePlante(plante p) {
+		return convertEntityToDto( planteRepository.save(p));
 	}
 
 	@Override
@@ -31,23 +36,28 @@ public class PlanteServiceImpl implements PlanteService{
 	@Override
 	public void deletePlante(plante p) {
 		planteRepository.delete(p);
-		
+
 	}
 
 	@Override
 	public void deletePlanteById(Long id) {
 		planteRepository.deleteById(id);
-		
+
 	}
 
 	@Override
-	public plante getPlante(Long id) {
-		return planteRepository.findById(id).get();
+	public PlanteDTO getPlante(Long id) {
+		return convertEntityToDto( planteRepository.findById(id).get());
 	}
 
 	@Override
-	public List<plante> getAllPlantes() {
-		return planteRepository.findAll();
+	public List<PlanteDTO> getAllPlantes() {
+		return planteRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+		/*List<plante> plt =  planteRepository.findAll(); 
+		  List<PlanteDTO> listpltDto = new ArrayList<>(plt.size()); 
+		  for (plante p : plt) 
+			  listpltDto.add(convertEntityToDto(p)); 
+		  return listpltDto;*/
 	}
 
 	@Override
@@ -96,10 +106,28 @@ public class PlanteServiceImpl implements PlanteService{
 		// TODO Auto-generated method stub
 		return planteRepository.trierPlantesNomsPrix();
 	}
-	
+
 	@Override
 	public List<Famille> getAllFamilles() {
 		return familleRepository.findAll();
+	}
+
+	@Override
+	public PlanteDTO convertEntityToDto(plante p) {
+		/*PlanteDTO planteDTO = new PlanteDTO();
+		planteDTO.setIdPlante(p.getIdPlante());
+		planteDTO.setNomPlante(p.getNomPlante());
+		planteDTO.setPrixPlante(p.getPrixPlante());
+		planteDTO.setDateAjout(p.getDateAjout());
+		planteDTO.setFamille(p.getFamille());
+		return planteDTO;*/
+
+		
+		 return PlanteDTO.builder() .idPlante(p.getIdPlante())
+		 .nomPlante(p.getNomPlante()) //.prixPlante(p.getPrixPlante())
+		 .dateAjout(p.getDateAjout()).nomfam(p.getFamille().getNomFam()) //.famille(p.getFamille())
+		 .build();  
+		 
 	}
 
 }
